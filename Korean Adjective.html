@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korean Adjectives Tutorial</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap');
+
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #FFA726;
+            --background-color: #f5f5f5;
+            --text-color: #333;
+            --slide-background: #ffffff;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        .presentation {
+            width: 90%;
+            max-width: 800px;
+            background-color: var(--slide-background);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slide {
+            padding: 40px;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: block;
+            opacity: 1;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: var(--primary-color);
+            position: sticky;
+            bottom: 0;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-button:hover {
+            background-color: #FF9800;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .example {
+            background-color: #E8F5E9;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .example:hover {
+            background-color: #C8E6C9;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+
+        .exercise {
+            margin-top: 30px;
+            background-color: #FFF3E0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .question {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option {
+            padding: 15px;
+            background-color: #FFECB3;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            background-color: #FFE082;
+            transform: translateX(5px);
+        }
+
+        .option.correct {
+            background-color: #C8E6C9;
+            border-color: #4CAF50;
+        }
+
+        .option.incorrect {
+            background-color: #FFCDD2;
+            border-color: #F44336;
+        }
+
+        .feedback {
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .progress-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .example-item {
+            background-color: #E8F5E9;
+            padding: 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .example-item:hover {
+            background-color: #C8E6C9;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+
+        @media (max-width: 600px) {
+            .presentation {
+                width: 100%;
+                border-radius: 0;
+            }
+
+            .slide {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            h3 {
+                font-size: 1.2em;
+            }
+
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <div class="progress-bar"></div>
+        <div class="slide active" id="title">
+            <h1>Mastering Korean Adjectives</h1>
+            <p>A Comprehensive Guide to Understanding, Conjugating, and Using Korean Adjectives</p>
+        </div>
+
+        <div class="slide" id="introduction">
+            <h2>Introduction to Korean Adjectives</h2>
+            <p>Korean adjectives, known as 형용사 (hyeongyongsa), are unique in that they function similarly to verbs. They can be used as predicates and undergo conjugation to express tense, politeness level, and mood.</p>
+            <h3>Key Points:</h3>
+            <ul>
+                <li>Korean adjectives end in -다 (-da) in their dictionary form.</li>
+                <li>They can be used as both predicates and modifiers.</li>
+                <li>Adjectives conjugate to show tense, politeness, and other grammatical features.</li>
+            </ul>
+        </div>
+
+        <div class="slide" id="types">
+            <h2>Types of Korean Adjectives</h2>
+            <h3>1. Descriptive Adjectives</h3>
+            <p>These describe qualities or states of being.</p>
+            <div class="example">
+                <p>크다 (keuda) - to be big</p>
+                <p>작다 (jakda) - to be small</p>
+                <p>예쁘다 (yeppeuda) - to be pretty</p>
+            </div>
+            <h3>2. Demonstrative Adjectives</h3>
+            <p>These point out specific nouns.</p>
+            <div class="example">
+                <p>이 (i) - this (for singular nouns that are close)</p>
+
+<p>그 (geu) - that (for singular nouns that are farther away)</p>
+
+<p>저 (jeo) - that (for singular nouns that are far from both the speaker and listener)</p>
+
+<p>이들 (ideul) - these (for plural nouns that are close)</p>
+
+<p>그들 (geudeul) - those (for plural nouns that are farther away)</p>
+
+<p>저들 (jeodeul) - those (for plural nouns that are far from both the speaker and listener)</p>
+            </div>
+            <div class="exercise">
+                <p class="question">Which of the following is NOT a descriptive adjective?</p>
+                <div class="options">
+                    <div class="option" data-correct="false">크다 (keuda)</div>
+                    <div class="option" data-correct="false">작다 (jakda)</div>
+                    <div class="option" data-correct="true">이 (i)</div>
+                    <div class="option" data-correct="false">예쁘다 (yeppeuda)</div>
+                </div>
+                <p class="feedback"></p>
+            </div>
+        </div>
+
+        <div class="slide" id="conjugation">
+            <h2>Conjugating Korean Adjectives</h2>
+            <h3>Basic Conjugation Rules</h3>
+            <p>Korean adjectives conjugate based on tense, politeness level, and sentence ending.</p>
+            <h4>Present Tense (Informal Polite)</h4>
+            <div class="example">
+                <p>Dictionary form: 크다 (keuda) - to be big</p>
+                <p>Conjugated: 커요 (keoyo) - is big</p>
+                <p>Rule: Remove -다, add -어요/-아요 (depending on the vowel)</p>
+            </div>
+            <h4>Past Tense (Informal Polite)</h4>
+            <div class="example">
+                <p>Dictionary form: 예쁘다 (yeppeuda) - to be pretty</p>
+                <p>Conjugated: 예뻤어요 (yeppeosseoyo) - was pretty</p>
+                <p>Rule: Remove -다, add -었어요/-았어요</p>
+            </div>
+            <h4>Future Tense (Informal Polite)</h4>
+            <div class="example">
+                <p>Dictionary form: 작다 (jakda) - to be small</p>
+                <p>Conjugated: 작을 거예요 (jageul geoyeyo) - will be small</p>
+                <p>Rule: Remove -다, add -을 거예요/-ㄹ 거예요</p>
+            </div>
+            <div class="exercise">
+                <p class="question">What is the correct present tense conjugation of 좋다 (johda) in informal polite form?</p>
+                <div class="options">
+                    <div class="option" data-correct="true">좋아요 (joayo)</div>
+                    <div class="option" data-correct="false">좋어요 (joeoyo)</div>
+                    <div class="option" data-correct="false">좋았어요 (joasseoyo)</div>
+                    <div class="option" data-correct="false">좋을 거예요 (joeul geoyeyo)</div>
+                </div>
+                <p class="feedback"></p>
+            </div>
+        </div>
+
+        <div class="slide" id="usage">
+            <h2>Using Korean Adjectives in Sentences</h2>
+            <h3>As Predicates</h3>
+            <p>Korean adjectives can function as the main verb of a sentence.</p>
+            <div class="example">
+                <p>날씨가 좋아요. (Nalsiga joayo.) - The weather is good.</p>
+                <p>이 책이 재미있어요. (I chaegi jaemiisseoyo.) - This book is interesting.</p>
+            </div>
+            <h3>As Modifiers</h3>
+            <p>To modify a noun, use the adjective stem + -ㄴ/-은.</p>
+            <div class="example">
+                <p>큰 집 (keun jip) - big house</p>
+<p>작은 개 (jageun gae) - small dog</p>
+<p>예쁜 꽃 (yeppun kkot) - beautiful flower</p>
+<p>좋은 책 (joheun chaek) - good book</p>
+<p>빠른 자동차 (ppareun jadongcha) - fast car</p>
+<p>행복한 사람 (haengbokhan saram) - happy person</p>
+<p>긴 나무 (gin namu) - tall tree</p>
+<p>차가운 물 (chagaun mul) - cold water</p>
+<p>새로운 아이디어 (saeroun aidea) - new idea</p>
+<p>어두운 방 (eoduun bang) - dark room</p>
+            </div>
+            <div class="exercise">
+                <p class="question">Which sentence correctly uses an adjective as a modifier?</p>
+                <div class="options">
+                    <div class="option" data-correct="false">날씨가 좋아요. (Nalsiga joayo.)</div>
+                    <div class="option" data-correct="true">작은 개가 귀여워요. (Jageun gaega gwiyeowoyo.)</div>
+                    <div class="option" data-correct="false">이 음식은 맛있어요. (I eumsigen massisseoyo.)</div>
+                    <div class="option" data-correct="false">책이 재미있어요. (Chaegi jaemiisseoyo.)</div>
+                </div>
+                <p class="feedback"></p>
+            </div>
+        </div>
+
+        <div class="slide" id="examples">
+            <h2>Examples of Korean Adjectives in Use</h2>
+            <p>Here are some examples of Korean adjectives used in sentences, conjugated in the present tense (polite form):</p>
+            <div class="examples-grid">
+               <div class="example-item">
+    <p><strong>크다 (keuda) - 커요 (keoyo)</strong></p>
+    <p>이 사과는 커요. (This apple is big.)</p>
+</div>
+<div class="example-item">
+    <p><strong>작다 (jakda) - 작아요 (jakayo)</strong></p>
+    <p>그 고양이는 작아요. (That cat is small.)</p>
+</div>
+<div class="example-item">
+    <p><strong>좋다 (johta) - 좋아요 (joayo)</strong></p>
+    <p>이 영화는 좋아요. (This movie is good.)</p>
+</div>
+<div class="example-item">
+    <p><strong>나쁘다 (nappeuda) - 나빠요 (napayo)</strong></p>
+    <p>그 날씨는 나빠요. (The weather is bad.)</p>
+</div>
+<div class="example-item">
+    <p><strong>빠르다 (ppareuda) - 빨라요 (ppallayo)</strong></p>
+    <p>그는 정말 빨라요. (He is really fast.)</p>
+</div>
+<div class="example-item">
+    <p><strong>느리다 (neurida) - 느려요 (neuryeoyo)</strong></p>
+    <p>이 차는 느려요. (This car is slow.)</p>
+</div>
+<div class="example-item">
+    <p><strong>새롭다 (saeropda) - 새로워요 (saerowoyo)</strong></p>
+    <p>이 책은 새로워요. (This book is new.)</p>
+</div>
+<div class="example-item">
+    <p><strong>오래되다 (oraedaeda) - 오래돼요 (oraedoeyo)</strong></p>
+    <p>이 건물은 오래돼요. (This building is old.)</p>
+</div>
+<div class="example-item">
+    <p><strong>가볍다 (gabyeopda) - 가벼워요 (gabyeowoyo)</strong></p>
+    <p>이 가방은 가벼워요. (This bag is light.)</p>
+</div>
+<div class="example-item">
+    <p><strong>무겁다 (mugeopda) - 무거워요 (mugeowoyo)</strong></p>
+    <p>이 상자는 무거워요. (This box is heavy.)</p>
+</div>
+<div class="example-item">
+    <p><strong>재미있다 (jaemiitda) - 재미있어요 (jaemiisseoyo)</strong></p>
+    <p>이 게임은 재미있어요. (This game is interesting.)</p>
+</div>
+<div class="example-item">
+    <p><strong>재미없다 (jaemi eopda) - 재미없어요 (jaemi eopseoyo)</strong></p>
+    <p>그 수업은 재미없어요. (That class is boring.)</p>
+</div>
+<div class="example-item">
+    <p><strong>깨끗하다 (kkaekkeuthada) - 깨끗해요 (kkaekkeutaeyo)</strong></p>
+    <p>이 방은 깨끗해요. (This room is clean.)</p>
+</div>
+<div class="example-item">
+    <p><strong>더럽다 (deoreopda) - 더러워요 (deoreowoyo)</strong></p>
+    <p>그 길은 더러워요. (That road is dirty.)</p>
+</div>
+<div class="example-item">
+    <p><strong>따뜻하다 (ttatteuthada) - 따뜻해요 (ttatteuthaeyo)</strong></p>
+    <p>오늘 날씨는 따뜻해요. (Today's weather is warm.)</p>
+</div>
+<div class="example-item">
+    <p><strong>차갑다 (chagapda) - 차가워요 (chagawoyo)</strong></p>
+    <p>이 물은 차가워요. (This water is cold.)</p>
+</div>
+<div class="example-item">
+    <p><strong>길다 (gilda) - 길어요 (gileoyo)</strong></p>
+    <p>이 길은 길어요. (This road is long.)</p>
+</div>
+<div class="example-item">
+    <p><strong>짧다 (jjalbda) - 짧아요 (jjalayo)</strong></p>
+    <p>내 치마는 짧아요. (My skirt is short.)</p>
+</div>
+<div class="example-item">
+    <p><strong>어두다 (eoduda) - 어두워요 (eoduwayo)</strong></p>
+    <p>이 방은 어두워요. (This room is dark.)</p>
+</div>
+<div class="example-item">
+    <p><strong>밝다 (balgda) - 밝아요 (balgayo)</strong></p>
+    <p>그 방은 밝아요. (That room is bright.)</p>
+</div>
+<div class="example-item">
+    <p><strong>편하다 (pyeonhada) - 편해요 (pyeonhaeyo)</strong></p>
+    <p>이 의자는 편해요. (This chair is comfortable.)</p>
+</div>
+<div class="example-item">
+    <p><strong>불편하다 (bulpyeonhada) - 불편해요 (bulpyeonhaeyo)</strong></p>
+    <p>그 신발은 불편해요. (Those shoes are uncomfortable.)</p>
+</div>
+<div class="example-item">
+    <p><strong>친절하다 (chinjeolhada) - 친절해요 (chinjeolhaeyo)</strong></p>
+    <p>그녀는 매우 친절해요. (She is very kind.)</p>
+</div>
+<div class="example-item">
+    <p><strong>냉정하다 (naengjeonghada) - 냉정해요 (naengjeonghaeyo)</strong></p>
+    <p>그는 냉정해요. (He is calm/cold emotionally.)</p>
+</div>
+<div class="example-item">
+    <p><strong>성실하다 (seongsilhada) - 성실해요 (seongsilhaeyo)</strong></p>
+    <p>그는 성실해요. (He is diligent.)</p>
+</div>
+<div class="example-item">
+    <p><strong>게으르다 (geureuda) - 게을러요 (geureureoyo)</strong></p>
+    <p>그는 게을러요. (He is lazy.)</p>
+</div>
+<div class="example-item">
+    <p><strong>똑똑하다 (ttokttokhada) - 똑똑해요 (ttokttokhaeyo)</strong></p>
+    <p>그녀는 똑똑해요. (She is smart/clever.)</p>
+</div>
+<div class="example-item">
+    <p><strong>어리다 (eorida) - 어려요 (eorieoyo)</strong></p>
+    <p>그는 아직 어려요. (He is still young.)</p>
+</div>
+<div class="example-item">
+    <p><strong>늙다 (neulgda) - 늙어요 (neuleoyo)</strong></p>
+    <p>나무가 늙어요. (The tree is old.)</p>
+</div>
+            </div>
+            <div class="exercise">
+                <p class="question">Which of the following sentences uses the adjective correctly?</p>
+                <div class="options">
+                    <div class="option" data-correct="true">이 책은 새로워요. (I chaekeun saerowoyo.)</div>
+                    <div class="option" data-correct="false">그 고양이는 크다요. (Geu goyangineun keudayo.)</div>
+                    <div class="option" data-correct="false">이 영화는 좋다요. (I yeonghwaneun johtayo.)</div>
+                    <div class="option" data-correct="false">그는 정말 빠르다요. (Geuneun jeongmal ppareudayo.)</div>
+                </div>
+                <p class="feedback"></p>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <button class="nav-button" id="prev">Previous</button>
+            <button class="nav-button" id="next">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        const progressBar = document.querySelector('.progress-bar');
+        let currentSlide = 0;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            prevButton.style.display = currentSlide === 0 ? 'none' : 'block';
+            nextButton.style.display = currentSlide === slides.length - 1 ? 'none' : 'block';
+            updateProgressBar();
+        }
+
+        function updateProgressBar() {
+            const progress = (currentSlide / (slides.length - 1)) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        prevButton.addEventListener('click', () => showSlide(currentSlide - 1));
+        nextButton.addEventListener('click', () => showSlide(currentSlide + 1));
+
+        showSlide(0);
+
+        // Add click event listeners to options
+        const options = document.querySelectorAll('.option');
+        options.forEach(option => {
+            option.addEventListener('click', function() {
+                const isCorrect = this.getAttribute('data-correct') === 'true';
+                const feedback = this.closest('.exercise').querySelector('.feedback');
+                if (isCorrect) {
+                    this.classList.add('correct');
+                    feedback.textContent = "Correct! Well done!";
+                    feedback.style.backgroundColor = "#C8E6C9";
+                    feedback.style.color = "#2E7D32";
+                } else {
+                    this.classList.add('incorrect');
+                    feedback.textContent = "Incorrect. Try again!";
+                    feedback.style.backgroundColor = "#FFCDD2";
+                    feedback.style.color = "#C62828";
+                }
+                feedback.style.display = "block";
+                setTimeout(() => {
+                    this.classList.remove('correct', 'incorrect');
+                    feedback.style.display = "none";
+                }, 2000);
+            });
+        });
+    </script>
+</body>
+</html>
